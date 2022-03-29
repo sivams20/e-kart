@@ -1,10 +1,12 @@
 import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import Categories from './components/Categories/Categories';
 
 function App() {
   return (
     <div className="App">
-      Welcome to e-kart
+        <Categories/>
     </div>
   );
 }

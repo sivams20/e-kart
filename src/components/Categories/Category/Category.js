@@ -1,10 +1,17 @@
 import React from "react";
+import styled from 'styled-components';
 
-function Category(){
+const ListItem = styled.div`
+    flex-grow: 1;
+    border: 1px solid grey;
+    height: 100px;
+`
+
+function Category(props){
     return(
-        <div>
-            Category
-        </div>
+        <ListItem>
+           {props.value}
+        </ListItem>
     )
 }
 
