@@ -10,10 +10,11 @@ const ProductDiv = styled.div`
     background-color: grey;
 `
 
-function Product(){
+function Product(props){
+    const product = props.product;
     return(
         <ProductDiv>
-            Individual product
+           {product.name}
         </ProductDiv>
     )
 }

@@ -17,24 +17,30 @@ const ListContainer = styled.div`
     align-items: center;
     justify-content: center;
     align-content: center; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100px;
+    padding: 20px;
 `
 function Categories(){
     const [categories, setCategory] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get(`https://run.mocky.io/v3/53b81783-799b-4348-b97b-f79665b882f1`)
+        //axios.get('https://run.mocky.io/v3/354d5cde-42d2-44d4-a644-b49acac192a3')
+        axios.get('localhost:5000/categories')
+        //axios.get('localhost:5000/orders')
         .then(res => {
-            //console.log(res.data);
-            const catData = [
-                {'id': 1, 'title': 'Grocery'}, 
-                {'id': 2, 'title': 'Electronics'},
-                {'id': 3, 'title': 'Mobile'},
-                {'id': 4, 'title': 'Beauty'}
-                ];
-            //console.log(catData);
-            setCategory(catData);
+            console.log(res.data);
+            setCategory(res.data);
         })
         .catch(error => {
             console.log(error);
+        })
+        .finally(() => {
+            setLoading(false);
         })
     },[])
 
@@ -42,7 +48,14 @@ function Categories(){
 
     return(
     <ListContainer>
-        <Category categories={categories} />
+            {
+                loading === true ? 
+                <div> Loading... </div> :
+                <React.Fragment> 
+                    {categories.map(category => <Category key={category.id} category={category}></Category>)}
+                </React.Fragment>
+            }
+        {/* <Category categories={categories} /> */}
         {/* {category} */}
         {/* {list.map(post => <div key={post.id}>{post.title}</div>)} */}
         {/* {list.map(post => <Category key={post.id}>{post.title}</Category>)} */}
