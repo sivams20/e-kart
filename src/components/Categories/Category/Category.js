@@ -24,12 +24,11 @@ const CategoryDiv = styled.div`
 `
 
 function Category(props){
-    console.log(props);
     const category = props.category;
     //const categories = props.categories? JSON.parse(props.categories) : '';
     return(
         <CategoryDiv>
-            {category.title}
+            {category.name}
            {/* {props.categories.length && props.categories.map(category => <div key={category.id}>{category.title}</div>)} */}
         </CategoryDiv>
     )

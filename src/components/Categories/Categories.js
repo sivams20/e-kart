@@ -30,8 +30,7 @@ function Categories(){
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         //axios.get('https://run.mocky.io/v3/354d5cde-42d2-44d4-a644-b49acac192a3')
-        axios.get('localhost:5000/categories')
-        //axios.get('localhost:5000/orders')
+        axios.get('http://localhost:5000/categories')
         .then(res => {
             console.log(res.data);
             setCategory(res.data);
@@ -52,7 +51,7 @@ function Categories(){
                 loading === true ? 
                 <div> Loading... </div> :
                 <React.Fragment> 
-                    {categories.map(category => <Category key={category.id} category={category}></Category>)}
+                    {categories.map(category => <Category key={category._id} category={category}></Category>)}
                 </React.Fragment>
             }
         {/* <Category categories={categories} /> */}
