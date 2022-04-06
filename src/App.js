@@ -1,10 +1,11 @@
 import logo from './logo.svg';
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Categories from './components/Categories/Categories';
 import Filters from './components/Filters/Filters';
 import Products from './components/Products/Products';
 import styled from 'styled-components';
+import { FilterContext } from './components/Contexts/FilterContext';
 
 const MainContainer = styled.div`
   display: flex;
@@ -12,13 +13,18 @@ const MainContainer = styled.div`
 `
 
 function App() {
+
+  const [rangeval, setRangeval] = useState(null);
+
   return (
     <div className="App">
         <Categories/>
+        <FilterContext.Provider value={{rangeval, setRangeval}}>
         <MainContainer>
           <Filters />
-          <Products />
+            <Products />
         </MainContainer>
+        </FilterContext.Provider>
     </div>
   );
 }
