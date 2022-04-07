@@ -15,11 +15,12 @@ const MainContainer = styled.div`
 function App() {
 
   const [rangeval, setRangeval] = useState(null);
+  const [colorCodes, setcolorCodes] = useState([1]);
 
   return (
     <div className="App">
         <Categories/>
-        <FilterContext.Provider value={{rangeval, setRangeval}}>
+        <FilterContext.Provider value={{slider: {rangeval, setRangeval}, color: {colorCodes, setcolorCodes} }} >
         <MainContainer>
           <Filters />
             <Products />

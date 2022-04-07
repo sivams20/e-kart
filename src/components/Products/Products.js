@@ -14,12 +14,10 @@ const ProductsWrapper = styled.div`
 `
 
 function Products(){
-
     const [products, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
-    //const value = useContext(FilterContext);
-    const {rangeval, setRangeval} = useContext(FilterContext);
-    console.log(rangeval);
+    const value = useContext(FilterContext);
+    console.log(value);
     useEffect(() => {
         axios.get('https://run.mocky.io/v3/ace59d18-981c-431e-ae56-5d2f37e2ab10')
         .then(response => {
