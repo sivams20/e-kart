@@ -15,7 +15,7 @@ const MainContainer = styled.div`
 function App() {
 
   const [rangeval, setRangeval] = useState(null);
-  const [colorCodes, setcolorCodes] = useState([1]);
+  const [colorCodes, setcolorCodes] = useState([]);
 
   return (
     <div className="App">

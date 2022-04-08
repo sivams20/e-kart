@@ -14,6 +14,7 @@ const ProductsWrapper = styled.div`
 `
 
 function Products(){
+
     const [products, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     const value = useContext(FilterContext);
@@ -29,7 +30,7 @@ function Products(){
         .finally(() => {
             setLoading(false);
         })
-    }, []);
+    }, [value]);
 
     return(
         <ProductsWrapper>

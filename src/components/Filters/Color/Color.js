@@ -13,12 +13,22 @@ const ColorWrapper = styled.div`
 
 
 function Color(){
+    console.log('Color Component');
+    const {slider, color} = useContext(FilterContext);
     const [colors, setColors] = useState([]);
-    const handleCheckboxState = (color) =>{
-        console.log(color);
+    const colorCodes = [];
+    const handleCheckboxState = (data) =>{
+         if(data.isChecked){
+            colorCodes = colorCodes.filter(item => item != data.id);
+         }else{
+            colorCodes.push(data.id);
+        }
+        colors.find(item => item.id === data.id).isChecked = !data.isChecked;
+        setColors(colors);
+        color.setcolorCodes(colorCodes);
     }
     useEffect(()=>{
-        axios.get('https://run.mocky.io/v3/b1563809-b2af-4db2-a2b7-8de974c42c04')
+        axios.get('https://run.mocky.io/v3/fdbe3884-b824-466c-8da4-0d0ecad17e7c')
         .then(response => {
             setColors(response.data);
         })
@@ -28,8 +38,6 @@ function Color(){
         .finally()
     },[])
 
-    const {slider, color} = useContext(FilterContext);
-    console.log(color);
     return(
         <ColorWrapper>
             <div>Color</div>
