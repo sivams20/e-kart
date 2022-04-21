@@ -1,7 +1,6 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components';
-import { FilterContext } from "../Contexts/FilterContext";
+import AppContext from "../Contexts/context";
 import Product from "./Product/Product";
 
 const ProductsWrapper = styled.div`
@@ -14,29 +13,12 @@ const ProductsWrapper = styled.div`
 `
 
 function Products(){
-
-    const [products, setProduct] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const value = useContext(FilterContext);
-    console.log(value);
-    useEffect(() => {
-        axios.get('https://run.mocky.io/v3/ace59d18-981c-431e-ae56-5d2f37e2ab10')
-        .then(response => {
-            setProduct(response.data);
-        })
-        .catch(error => {
-            
-        })
-        .finally(() => {
-            setLoading(false);
-        })
-    }, [value]);
+    const { products } = useContext(AppContext);
+    console.log(products);
 
     return(
         <ProductsWrapper>
             {
-                loading === true ? 
-                <div> Loading... </div> :
                 <React.Fragment> 
                     {products.map( product => <Product key={product.id} product={product}></Product>)}
                 </React.Fragment>

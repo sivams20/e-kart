@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from 'styled-components';
 
 const ColorWrapper = styled.div`
@@ -10,23 +9,12 @@ const ColorWrapper = styled.div`
 `
 function Color(props){
     console.log('Color Component');
-    const [colors, setColors] = useState([]);
+    console.log(props);
 
     const onColorChange = (color) =>{
         console.log('onColorChange');
         props.colorChange(color);
     }
-
-    useEffect(()=>{
-        axios.get('https://run.mocky.io/v3/fdbe3884-b824-466c-8da4-0d0ecad17e7c')
-        .then(response => {
-            setColors(response.data);
-        })
-        .catch(error => {
-
-        })
-        .finally()
-    },[])
 
     return(
         <ColorWrapper>
@@ -35,8 +23,8 @@ function Color(props){
                 onChange={(e) => onColorChange(e.target.value)}>
                 <option value="" key='all color'>All colors</option>
                 {
-                    colors &&
-                      colors.map((color) => <option key={color.id} value={color.name}>{color.name}</option>)
+                    props.colors &&
+                      props.colors.map((color) => <option key={color.id} value={color.name}>{color.name}</option>)
                 }
             </select>
         </ColorWrapper>
