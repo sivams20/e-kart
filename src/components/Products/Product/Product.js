@@ -26,7 +26,7 @@ function Product(props){
             <div>Product Rating</div>
             <div><button>Add to Watchlist</button></div>
             <div><button onClick={addToCard}>Add to cart</button></div>
-            <Login show={modal} />
+            <Login show={modal} close={addToCard} />
         </ProductDiv>
     )
 }
