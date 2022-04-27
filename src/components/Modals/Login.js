@@ -1,6 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
 import ReactDom from 'react-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const ModalContainer = styled.div`
     position: fixed;
@@ -51,6 +53,12 @@ const FormWrapper = styled.form`
     gap: 10px;
 `
 
+const FormContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+`
+
 const Submit = styled.button`
     width: 100px;
     align-self: center;
@@ -58,9 +66,27 @@ const Submit = styled.button`
 
 function Login({show, close}){
 
-    const submit = () =>{
-        console.log('submit');
-    }
+    // const submit = () =>{
+    //     console.log('submit');
+    // }
+
+    const formik = useFormik({
+        initialValues: {
+          email: '',
+          password: '',
+        },
+        validationSchema: Yup.object({
+            email: Yup.string()
+            .email('Invalid email address')
+            .required('Required'),
+            password: Yup.string()
+            .min(3, 'Must be minimum 3 characters')
+            .required('Required'),
+        }),
+        onSubmit: values => {
+          console.log(values);
+        },
+      });
 
     return ReactDom.createPortal(<div>
         {
@@ -70,18 +96,32 @@ function Login({show, close}){
                     <ModalHeader>
                         <h2>Login</h2>
                     </ModalHeader>
-                    <ModalContent>
-                        <FormWrapper>
-                            <label htmlFor="email">Email: </label>
-                            <input type="text" placeholder="Enter email" name="email" />
-                            <label htmlFor="password">Password: </label>
-                            <input type="password" placeholder="Enter password" name="password" />
-                        </FormWrapper>
-                    </ModalContent>
-                    <Footer>
-                        <Button onClick={close}>cancel</Button>
-                        <Button onClick={submit}>submit</Button>
-                    </Footer>
+                    <form onSubmit={formik.handleSubmit}>
+                        <ModalContent>
+                            <FormContent>
+                                <label htmlFor="email">Email: </label>
+                                <input 
+                                type="text" 
+                                id="email"
+                                placeholder="Enter email" 
+                                name="email" 
+                                {...formik.getFieldProps('email')} />
+                                {formik.touched.email && formik.errors.email ? (<div>{formik.errors.email}</div>) : null}
+                                <label htmlFor="password">Password: </label>
+                                <input 
+                                    type="password"
+                                    id="password"
+                                    placeholder="Enter password" 
+                                    name="password" 
+                                    {...formik.getFieldProps('password')} />
+                                    {formik.touched.email && formik.errors.password ? (<div>{formik.errors.password}</div>) : null}
+                            </FormContent>
+                        </ModalContent>
+                        <Footer>
+                            <Button onClick={close}>cancel</Button>
+                            <Button type="submit">submit</Button>
+                        </Footer>
+                    </form>
                 </Modal>
             </ModalContainer>
             : null
