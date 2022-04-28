@@ -85,6 +85,8 @@ function Login({show, close}){
         }),
         onSubmit: values => {
           console.log(values);
+          localStorage.setItem("kartUser", values.email);
+          close();
         },
       });
 

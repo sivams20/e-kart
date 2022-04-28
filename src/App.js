@@ -5,6 +5,7 @@ import Filters from './components/Filters/Filters';
 import Products from './components/Products/Products';
 import styled from 'styled-components';
 import { Provider } from './components/Contexts/context';
+import Header from './components/Header';
 
 const MainContainer = styled.div`
   display: flex;
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className="App">
+        <Header/>
         <Categories/>
         <Provider>
           <MainContainer>

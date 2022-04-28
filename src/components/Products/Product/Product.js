@@ -15,7 +15,15 @@ const ProductDiv = styled.div`
 function Product(props){
     const [modal, setModal] = useState(false);
     const addToCard = () =>{
-        setModal(!modal);
+        if(localStorage.getItem("kartUser")){
+            return false;
+        }else{
+            setModal(!modal);
+        }
+    }
+
+    const close = () =>{
+        setModal(false);
     }
     const product = props.product;
     return(
@@ -26,7 +34,7 @@ function Product(props){
             <div>Product Rating</div>
             <div><button>Add to Watchlist</button></div>
             <div><button onClick={addToCard}>Add to cart</button></div>
-            <Login show={modal} close={addToCard} />
+            <Login show={modal} close={close} />
         </ProductDiv>
     )
 }
