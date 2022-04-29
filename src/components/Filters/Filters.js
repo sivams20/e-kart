@@ -12,7 +12,7 @@ const FilterWrapper = styled.div`
 function Filters(){
     console.log('Filters');
 
-    const { 
+    const {
         filterOptions, 
         filterObject, 
         setFilterObject,

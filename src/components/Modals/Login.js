@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from 'styled-components';
 import ReactDom from 'react-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import AppContext from "../Contexts/context";
 
 const ModalContainer = styled.div`
     position: fixed;
@@ -65,11 +66,7 @@ const Submit = styled.button`
 `
 
 function Login({show, close}){
-
-    // const submit = () =>{
-    //     console.log('submit');
-    // }
-
+    const {setUserLogin} = useContext(AppContext);
     const formik = useFormik({
         initialValues: {
           email: '',
@@ -86,6 +83,7 @@ function Login({show, close}){
         onSubmit: values => {
           console.log(values);
           localStorage.setItem("kartUser", values.email);
+          setUserLogin(true);
           close();
         },
       });

@@ -8,6 +8,8 @@ export const AppProvider = AppContext.Provider;
 export default AppContext;
 
 export const Provider = (props) => {
+    const isLoggedIn = (localStorage.getItem('kartUser')) ? true : false;
+    const [isUserLoggedIn, setUserLogin] = useState(isLoggedIn);
     const [filterObject, setFilterObject] = useState({
         color: '',
         slider: ''
@@ -18,7 +20,8 @@ export const Provider = (props) => {
     const [products, setProducts] = useState([])
 
     const actions = { 
-        setFilterObject
+        setFilterObject,
+        setUserLogin
     }
 
     useEffect(()=>{
@@ -50,7 +53,8 @@ export const Provider = (props) => {
     const state = {
         filterOptions,
         products,
-        filterObject
+        filterObject,
+        isUserLoggedIn
     }
 
     return(

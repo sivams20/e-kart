@@ -17,13 +17,13 @@ function App() {
 
   return (
     <div className="App">
-        <Header/>
-        <Categories/>
         <Provider>
-          <MainContainer>
-            <Filters/>
-            <Products />
-          </MainContainer>
+          <Header/>
+          <Categories/>
+            <MainContainer>
+              <Filters/>
+              <Products />
+            </MainContainer>
         </Provider>
     </div>
   );
